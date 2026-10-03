@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="de" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Bank Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0f172a',
+                            card: '#1e293b',
+                            cardhover: '#334155',
+                            accent: '#f59e0b',
+                            text: '#f8fafc',
+                            subtext: '#94a3b8',
+                            green: '#10b981',
+                            red: '#ef4444'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0b1120;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* لإخفاء شريط التمرير */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        .card-gradient {
+            background: linear-gradient(135deg, #0d9488 0%, #1e3a8a 100%);
+        }
+        .glass-effect {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="pb-10">
+
+    <!-- الحاوية الرئيسية (شكل الهاتف) -->
+    <div class="max-w-md mx-auto min-h-screen px-4 pt-6">
+
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-6">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-building-columns text-brand-accent text-2xl"></i>
+                <div class="leading-tight">
+                    <h1 class="text-xl font-bold tracking-wide">GLOBAL</h1>
+                    <h1 class="text-xl font-bold tracking-wide">BANK</h1>
+                </div>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="w-8 h-8 rounded-full bg-brand-card flex items-center justify-center relative text-brand-subtext hover:text-white">
+                    <i class="fa-solid fa-bell text-sm"></i>
+                    <span class="absolute top-2 right-2 w-1.5 h-1.5 bg-brand-red rounded-full"></span>
+                </button>
+                <button class="w-8 h-8 rounded-full bg-brand-card flex items-center justify-center text-brand-subtext hover:text-white">
+                    <i class="fa-solid fa-gear text-sm"></i>
+                </button>
+                <div class="flex items-center gap-2 ml-2">
+                    <div class="w-10 h-10 rounded-full bg-brand-accent flex items-center justify-center text-brand-dark font-bold text-lg">
+                        M
+                    </div>
+                    <div class="hidden sm:block text-xs">
+                        <div class="font-bold">VIP-Konto</div>
+                        <div class="text-brand-subtext">Kunden-ID: #889021</div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Total Balance Section -->
+        <section class="bg-brand-card rounded-2xl p-5 mb-6 border border-slate-700 shadow-lg relative">
+            <div class="flex justify-between items-center mb-2">
+                <div class="flex items-center gap-2 text-brand-subtext text-sm">
+                    <i class="fa-solid fa-wallet"></i>
+                    <span>Verfügbares Gesamtguthaben</span>
+                </div>
+                <button id="toggleBalance" class="text-brand-subtext hover:text-white">
+                    <i class="fa-solid fa-eye"></i>
+                </button>
+            </div>
+            
+            <h2 id="balanceAmount" class="text-4xl font-bold mb-1 tracking-tight">3.150.000,00 €</h2>
+            <p id="balanceText" class="text-brand-subtext text-xs mb-6">Drei Millionen einhundertfünfzigtausend Euro</p>
+
+            <div class="flex justify-between border-t border-slate-700 pt-4">
+                <div>
+                    <div class="text-brand-subtext text-xs mb-1">Monatlicher Ertrag (+2,4%)</div>
+                    <div class="text-brand-green font-semibold text-sm">+ 75.600,00 €</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-brand-subtext text-xs mb-1">Aktive Investitionen</div>
+                    <div class="text-blue-400 font-semibold text-sm">1.200.000,00 €</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Schnellaktionen (Quick Actions) -->
+        <section class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Schnellaktionen</h3>
+            <div class="grid grid-cols-3 gap-3">
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-paper-plane text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Überweisung</span>
+                </button>
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-qrcode text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">QR-Code</span>
+                </button>
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-file-invoice-dollar text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Rechnungen</span>
+                </button>
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-money-bill-transfer text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Einzahlung</span>
+                </button>
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-earth-americas text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Ausland</span>
+                </button>
+                <button class="bg-brand-card hover:bg-brand-cardhover transition rounded-xl p-3 flex flex-col items-center justify-center gap-2 border border-slate-800">
+                    <i class="fa-solid fa-hand-holding-dollar text-blue-400 text-xl mb-1"></i>
+                    <span class="text-xs font-medium">Kredit</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Banking-Services -->
+        <section class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Banking-Services</h3>
+            <div class="grid grid-cols-2 gap-3">
+                <div class="bg-brand-card rounded-xl p-3 border border-slate-800 flex items-start gap-3">
+                    <i class="fa-solid fa-chart-line text-brand-accent mt-1"></i>
+                    <div>
+                        <div class="text-sm font-semibold">Trading & Portfolio</div>
+                        <div class="text-brand-subtext text-[10px]">Aktien, Gold & Devisen</div>
+                    </div>
+                </div>
+                <div class="bg-brand-card rounded-xl p-3 border border-slate-800 flex items-start gap-3">
+                    <i class="fa-solid fa-piggy-bank text-brand-accent mt-1"></i>
+                    <div>
+                        <div class="text-sm font-semibold">Festgeld & Sparen</div>
+                        <div class="text-brand-subtext text-[10px]">High-Yield Zinskonten</div>
+                    </div>
+                </div>
+                <div class="bg-brand-card rounded-xl p-3 border border-slate-800 flex items-start gap-3">
+                    <i class="fa-solid fa-shield-halved text-brand-accent mt-1"></i>
+                    <div>
+                        <div class="text-sm font-semibold">Versicherungen</div>
+                        <div class="text-brand-subtext text-[10px]">Schutz für Vermögen & Immobilien</div>
+                    </div>
+                </div>
+                <div class="bg-brand-card rounded-xl p-3 border border-slate-800 flex items-start gap-3">
+                    <i class="fa-solid fa-credit-card text-brand-accent mt-1"></i>
+                    <div>
+                        <div class="text-sm font-semibold">Kartenverwaltung</div>
+                        <div class="text-brand-subtext text-[10px]">Limits & Karten sperren</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Letzte Transaktionen -->
+        <section class="mb-6">
+            <div class="flex justify-between items-end mb-3">
+                <h3 class="text-lg font-semibold">Letzte Transaktionen</h3>
+                <a href="#" class="text-blue-400 text-xs hover:underline">Alle anzeigen</a>
+            </div>
+            <div class="bg-brand-card rounded-2xl border border-slate-800 overflow-hidden">
+                <!-- Transaction 1 -->
+                <div class="flex justify-between items-center p-4 border-b border-slate-700/50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-brand-green">
+                            <i class="fa-solid fa-arrow-trend-up"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-semibold">Investment-Ausschüttung</div>
+                            <div class="text-brand-subtext text-[10px]">Heute, 10:30 Uhr • Europäischer Investmentfonds</div>
+                        </div>
+                    </div>
+                    <div class="text-brand-green font-semibold text-sm">+ 15.000,00 €</div>
+                </div>
+                <!-- Transaction 2 -->
+                <div class="flex justify-between items-center p-4 border-b border-slate-700/50">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-red-500/20 flex items-center justify-center text-brand-red">
+                            <i class="fa-solid fa-house"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-semibold">Immobilienerwerb</div>
+                            <div class="text-brand-subtext text-[10px]">Gestern, 16:15 Uhr • Berlin, Deutschland</div>
+                        </div>
+                    </div>
+                    <div class="text-brand-red font-semibold text-sm">- 450.000,00 €</div>
+                </div>
+                <!-- Transaction 3 -->
+                <div class="flex justify-between items-center p-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-lg bg-green-500/20 flex items-center justify-center text-brand-green">
+                            <i class="fa-solid fa-money-bill-wave"></i>
+                        </div>
+                        <div>
+                            <div class="text-sm font-semibold">Direkteinzahlung</div>
+                            <div class="text-brand-subtext text-[10px]">04. Sept. 2026 • Firmenkonto</div>
+                        </div>
+                    </div>
+                    <div class="text-brand-green font-semibold text-sm">+ 200.000,00 €</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aktive Karte -->
+        <section class="mb-6">
+            <h3 class="text-lg font-semibold mb-3">Aktive Karte</h3>
+            <div class="card-gradient rounded-2xl p-5 shadow-lg relative overflow-hidden h-48 flex flex-col justify-between">
+                <!-- تأثيرات بصرية للخلفية -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-white opacity-5 rounded-full -mr-10 -mt-10"></div>
+                <div class="absolute bottom-0 left-0 w-24 h-24 bg-white opacity-5 rounded-full -ml-8 -mb-8"></div>
+                
+                <div class="flex justify-between items-start z-10">
+                    <div>
+                        <div class="text-sm font-semibold tracking-widest text-teal-100">VIP BLACK CARD</div>
+                        <i class="fa-solid fa-microchip text-3xl mt-4 text-yellow-300 opacity-80"></i>
+                    </div>
+                    <i class="fa-brands fa-cc-mastercard text-4xl opacity-80"></i>
+                </div>
+                
+                <div class="z-10">
+                    <div class="text-xl tracking-widest mb-2 font-mono flex items-center gap-3">
+                        <span>••••</span> <span>••••</span> <span>••••</span> <span>9982</span>
+                    </div>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <div class="text-[8px] text-teal-100 uppercase tracking-wider mb-1">Karteninhaber</div>
+                            <div class="text-sm font-semibold tracking-wider">M. VON BERG</div>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-[8px] text-teal-100 uppercase tracking-wider mb-1">Gültig bis</div>
+                            <div class="text-sm font-semibold tracking-wider">12/30</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live-Wechselkurse -->
+        <section class="mb-6">
+            <div class="flex justify-between items-center mb-3">
+                <h3 class="text-lg font-semibold">Live-Wechselkurse</h3>
+                <div class="flex items-center gap-1 text-[10px] text-brand-red font-bold">
+                    <span class="w-1.5 h-1.5 bg-brand-red rounded-full animate-pulse"></span>
+                    LIVE
+                </div>
+            </div>
+            <div class="bg-brand-card rounded-xl p-4 border border-slate-800">
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-sm text-brand-subtext">EUR / USD</div>
+                    <div class="text-sm font-mono">1,0854</div>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                    <div class="text-sm text-brand-subtext">EUR / GBP</div>
+                    <div class="text-sm font-mono">0,8541</div>
+                </div>
+                <div class="flex justify-between items-center">
+                    <div class="text-sm text-brand-subtext">EUR / XAU (Gold)</div>
+                    <div class="text-sm font-mono">2.150,20</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Persönlicher Betreuer -->
+        <section class="mb-10 text-center bg-brand-card rounded-2xl p-5 border border-slate-800">
+            <div class="w-12 h-12 rounded-full bg-brand-dark mx-auto flex items-center justify-center text-brand-accent mb-3">
+                <i class="fa-solid fa-headset text-xl"></i>
+            </div>
+            <h3 class="font-semibold mb-1">Persönlicher Betreuer</h3>
+            <p class="text-xs text-brand-subtext mb-4">24/7 Exklusiv-Service für VIP-Kunden</p>
+            <button class="bg-brand-accent hover:bg-yellow-500 text-brand-dark font-bold text-sm w-full py-2.5 rounded-lg transition">
+                Direkt kontaktieren
+            </button>
+        </section>
+
+    </div>
+
+    <!-- كود JavaScript بسيط لإخفاء وإظهار الرصيد -->
+    <script>
+        const toggleBtn = document.getElementById('toggleBalance');
+        const balanceAmount = document.getElementById('balanceAmount');
+        const balanceText = document.getElementById('balanceText');
+        const eyeIcon = toggleBtn.querySelector('i');
+
+        let isHidden = false;
+        const actualBalance = "3.150.000,00 €";
+        const actualText = "Drei Millionen einhundertfünfzigtausend Euro";
+        
+        toggleBtn.addEventListener('click', () => {
+            isHidden = !isHidden;
+            if (isHidden) {
+                balanceAmount.textContent = "**** €";
+                balanceText.textContent = "***";
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                balanceAmount.textContent = actualBalance;
+                balanceText.textContent = actualText;
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        });
+    </script>
+</body>
+</html>
